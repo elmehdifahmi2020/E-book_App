@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/book_img"
+        android:layout_width="129dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/download"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
+    <Button
+        android:id="@+id/update_img"
+        android:layout_width="205dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#03FFFFFF"
+        android:text="Ipload Photo"
+        android:textColor="#0B0B0B"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/book_img" />
+
+    <EditText
+        android:id="@+id/book_name"
+        android:layout_width="281dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/bordertext"
+        android:ems="10"
+        android:textAlignment="center"
+        android:hint="Name Book"
+        android:inputType="text"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.558"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/update_img" />
+
+    <Spinner
+        android:id="@+id/sp_type"
+        android:layout_width="281dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/bordertext"
+        android:ems="10"
+        android:gravity="center"
+        android:hint=""
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/book_price" />
+
+    <EditText
+        android:id="@+id/book_price"
+        android:layout_width="281dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/bordertext"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Price"
+        android:inputType="text"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.631"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/book_author" />
+
+    <EditText
+        android:id="@+id/book_author"
+        android:layout_width="281dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/bordertext"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Author"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.631"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/book_name" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/add"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:background="@drawable/rounded_button"
+        android:text="ADD"
+        android:textAllCaps="false"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.468"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/sp_type"
+        app:layout_constraintVertical_bias="0.589" />
+    
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.04136253" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="384dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="16dp" />
+
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="687dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
