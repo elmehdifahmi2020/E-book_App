@@ -59,7 +59,8 @@ class MainActivity : AppCompatActivity(),CustomAdapter.OnItemClickListener{
             "A coming-of-age novel by J.D. Salinger about teenage angst and rebellion.",
             "The first book in the Harry Potter series, introducing the wizarding world.",
             "A fantasy novel by J.R.R. Tolkien about Bilbo Baggins' journey.",
-            "An epic fantasy series by J.R.R. Tolkien about the quest to destroy the One Ring."
+            "An epic fantasy series by J.R.R. Tolkien about the quest to destroy the One Ring.",
+            "gggggggggggggggggggggggggggggggggggggggg"
 
         )
         val listTypes = listOf("ReadBook","AudioBook")
