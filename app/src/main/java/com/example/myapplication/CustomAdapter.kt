@@ -44,7 +44,7 @@ class CustomAdapter(private val dataSet: List<ModelBook>,private val listner : O
             //Toast.makeText(this, "This is a short toast message", Toast.LENGTH_SHORT).show()
 
             //notifyDataSetChanged()
-        }
+        //}
     }
 
     override fun getItemCount() = dataSet.size
@@ -55,4 +55,5 @@ class CustomAdapter(private val dataSet: List<ModelBook>,private val listner : O
 
 
 }
+
 

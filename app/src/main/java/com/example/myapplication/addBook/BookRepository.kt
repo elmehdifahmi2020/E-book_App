@@ -24,4 +24,8 @@ class BookRepository {
     fun getAllBookSearch() : List<ModelBook>{
         return newlist
     }
+
+    fun deleteBookByInt(id : Int){
+        list.removeAt(id)
+        }
 }

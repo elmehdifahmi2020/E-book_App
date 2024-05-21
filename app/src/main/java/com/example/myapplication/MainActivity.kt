@@ -9,11 +9,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.addBook.AddBook
 import com.example.myapplication.addBook.AddBook_MVVM
 import com.example.myapplication.model.ModelBook
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import kotlin.random.Random
 
 
@@ -22,6 +24,7 @@ class MainActivity : AppCompatActivity(),CustomAdapter.OnItemClickListener{
     lateinit var btnAudio :Button
     lateinit var btnRead :Button
     lateinit var myView : RecyclerView
+    lateinit var customAdapter:CustomAdapter
     private lateinit var viewModel : AddBook_MVVM
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,9 +49,9 @@ class MainActivity : AppCompatActivity(),CustomAdapter.OnItemClickListener{
         val writer = bundel?.getString("writer")
         val price = bundel?.getString("price")
         val type = bundel?.getString("type")
-        val listImages = listOf<Int>(R.drawable.cover1,R.drawable.cover2,R.drawable.cover3,R.drawable.cover5,R.drawable.cover6,R.drawable.cover7,R.drawable.cover9,R.drawable.cover10)
-        val listTitres = listOf<String>( "The Great Gatsby", "To Kill a Mockingbird", "1984", "Pride and Prejudice", "The Catcher in the Rye", "Harry Potter and the Sorcerer's Stone", "The Hobbit", "The Lord of the Rings")
-        val listAuthors =  listOf("F. Scott Fitzgerald", "Harper Lee", "George Orwell", "Jane Austen", "J.D. Salinger", "J.K. Rowling", "J.R.R. Tolkien", "J.R.R. Tolkien")
+        val listImages = listOf<Int>(R.drawable.cover1,R.drawable.cover2,R.drawable.cover3,R.drawable.cover5,R.drawable.cover6,R.drawable.cover7,R.drawable.cover9,R.drawable.cover10,R.drawable.interstellar)
+        val listTitres = listOf<String>( "The Great Gatsby", "To Kill a Mockingbird", "1984", "Pride and Prejudice", "The Catcher in the Rye", "Harry Potter and the Sorcerer's Stone", "The Hobbit", "The Lord of the Rings","inter")
+        val listAuthors =  listOf("F. Scott Fitzgerald", "Harper Lee", "George Orwell", "Jane Austen", "J.D. Salinger", "J.K. Rowling", "J.R.R. Tolkien", "J.R.R. Tolkien","mehdi")
         val descriptions = listOf("A novel by F. Scott Fitzgerald about the American Dream and the roaring twenties.",
             "A classic by Harper Lee that addresses racial injustice in the American South.",
             "A dystopian novel by George Orwell depicting a totalitarian regime.",
@@ -57,6 +60,7 @@ class MainActivity : AppCompatActivity(),CustomAdapter.OnItemClickListener{
             "The first book in the Harry Potter series, introducing the wizarding world.",
             "A fantasy novel by J.R.R. Tolkien about Bilbo Baggins' journey.",
             "An epic fantasy series by J.R.R. Tolkien about the quest to destroy the One Ring."
+
         )
         val listTypes = listOf("ReadBook","AudioBook")
         val minPrice = 10.0
@@ -64,9 +68,10 @@ class MainActivity : AppCompatActivity(),CustomAdapter.OnItemClickListener{
         val gridLayoutManager = GridLayoutManager(application,2)
         viewModel = ViewModelProvider(this).get(AddBook_MVVM::class.java)
         viewModel.getAllBook().observe(this) { boklist ->
+            customAdapter=CustomAdapter(boklist,this)
             myView.layoutManager = gridLayoutManager
-            myView.adapter = CustomAdapter(boklist,this)
-        }
+            myView.adapter = customAdapter
+         }
 
         for ( i in 0..listImages.size-1){
             val price = minPrice + Random.nextDouble() * (maxPrice - minPrice)
@@ -81,11 +86,30 @@ class MainActivity : AppCompatActivity(),CustomAdapter.OnItemClickListener{
             checkIteminBottomm(it.itemId)
         }
         btnAudio.setOnClickListener {
-            val intent = Intent(application,Aidio_Read_Book::class.java)
+            startActivity(Intent(application,Aidio_Read_Book::class.java))
             }
         btnRead.setOnClickListener {
             startActivity(Intent(application,Aidio_Read_Book::class.java))
         }
+
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT){
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val deletedCource :ModelBook = viewModel.allBook().get(viewHolder.adapterPosition)
+                val position = viewHolder.adapterPosition
+                viewModel.deleteBookById(position)
+                customAdapter.notifyItemRemoved(position)
+                Snackbar.make(myView,"Deleted"+ deletedCource.title,Snackbar.LENGTH_LONG).show()
+
+            }
+        } ).attachToRecyclerView(myView)
 
     }
     fun checkIteminBottomm(butonBottom:Int ): Boolean {
@@ -93,8 +117,8 @@ class MainActivity : AppCompatActivity(),CustomAdapter.OnItemClickListener{
             R.id.add_book -> {
                 startActivity(Intent(application, AddBook::class.java))
                 true}
-            R.id.setting_book -> {
-               // Toast.makeText(application,viewModel.getAllBook().get(0).title,Toast.LENGTH_LONG).show()
+            R.id.home_book -> {
+                startActivity(Intent(application, MainActivity::class.java))
                 true
             }
             else -> false

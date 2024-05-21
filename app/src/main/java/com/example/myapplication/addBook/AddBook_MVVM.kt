@@ -30,4 +30,7 @@ class AddBook_MVVM : ViewModel(){
         list.value = repository.getAllBookSearch()
         return list
     }
+    fun deleteBookById(id : Int){
+        repository.deleteBookByInt(id)
+        }
 }
